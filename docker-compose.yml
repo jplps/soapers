@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  postgres:
+    image: postgres
+    restart: on-failure
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: distribunetes
+    volumes:
+      - ./backend/volumes/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    container_name: backend
+    restart: on-failure
+    depends_on:
+      - postgres
+    volumes:
+      - ./backend/:/home/node/
+    ports:
+      - "4000:4000"
