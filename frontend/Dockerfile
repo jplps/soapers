@@ -1,5 +1,8 @@
 FROM node
 
+ARG NODE_ENV
+ENV NODE_ENV ${NODE_ENV}
+
 # APP directory
 RUN mkdir -p /home/node
 WORKDIR /home/node/

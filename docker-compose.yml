@@ -15,6 +15,7 @@ services:
 
   backend:
     build: ./backend
+    command: bash -c "yarn dev"
     container_name: backend
     restart: on-failure
     depends_on:
@@ -23,3 +24,20 @@ services:
       - ./backend/:/home/node/
     ports:
       - "4000:4000"
+
+  frontend:
+    build: ./frontend
+    command: bash -c "yarn start"
+    container_name: frontend
+    restart: on-failure
+    stdin_open: true
+    env_file:
+      - frontend/variables.env
+    links:
+      - backend
+    depends_on:
+      - backend
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend:/home/node
