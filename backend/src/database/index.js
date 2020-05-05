@@ -2,11 +2,8 @@
 const Sequelize = require('sequelize');
 const dbConfig = require('../config/postgres');
 
-//const User = require('../models/User');
-
 const connection = new Sequelize(dbConfig);
 
-//User.init(connection);
-//User.associate(connection.models);
+connection.import("../models/user.js");
 
 module.exports = connection;
