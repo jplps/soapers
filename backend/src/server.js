@@ -5,8 +5,6 @@ const cookieParser = require('cookie-parser');
 //const routes = require('./routes');
 const models = require('./models');
 
-require('./database/index');
-
 const app = express();
 
 // Understanding req in json
