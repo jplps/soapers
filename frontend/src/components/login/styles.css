@@ -1,0 +1,42 @@
+#login {
+	margin: 1rem;
+}
+
+#login h1 {
+	text-align: center;
+}
+
+#login fieldset,
+#login .login-options {
+	max-width: 500px;
+	margin: 2rem auto;
+	display: grid;
+	grid-gap: 1rem;
+}
+
+#login .login-options {
+	grid-template-columns: 1fr 1fr;
+}
+
+#login fieldset {
+	grid-template-columns: 1fr;
+}
+
+#login .form-email,
+#login .form-pass {
+	margin: 1rem auto;
+	max-width: 500px;
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-gap: 1rem;
+}
+
+#login form button {
+	margin: 1rem;
+}
+
+#login legend button {
+	cursor: pointer;
+	border: none;
+	margin: 1rem;
+}

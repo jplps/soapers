@@ -1,23 +1,33 @@
 import React from 'react';
 
-import api from '../../services/api';
+import fetch from '../../services/api';
 
 export default class Main extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			loading: true,
+			users: []
+		};
+	}
+
 	componentDidMount() {
 		this.loadUsers();
 	}
 
 	loadUsers = async () => {
-		try {
-			const resp = await api.get('/');
-
-			return console.log(resp);
-		} catch (err) {
-			return console.log(err);
-		}
+		const { data: { users } } = await fetch('/users');
+		this.setState({ loading: false, users: users });
 	};
 
 	render() {
-		return <p>Ready to consume</p>
+		return (
+			<>
+				{this.state.loading ?
+					<p>loading</p>
+					: this.state.users.map(user => <p key={user.id}>{user.email}</p>)
+				}
+			</>
+		);
 	}
 }
