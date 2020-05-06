@@ -12,7 +12,7 @@ module.exports = {
 		try {
 			// See if there's not a user with that email
 			if (await models.User.findOne({ where: { email } })) {
-				return res.status(400).send({ err: 'A user with this email already exists.' })
+				return res.status(200).send({ err: 'Já existe um usuário com este e-mail.' })
 			}
 			// Store hashed pass
 			const password = await bcrypt.hash(req.body.password, 10);
@@ -23,8 +23,9 @@ module.exports = {
 			// Returning the user to the browser
 			return res.status(200).send(user);
 		} catch (err) {
+			// Let error run in console and send a message
 			console.log(err);
-			return res.status(400).send({ err: 'User registration failed. See DB console for more info about the error.' });
+			return res.status(200).send({ err: 'Registro de usuário falhou. Veja o console do Banco de Dados para mais informações sobre o erro.' });
 		}
 	},
 
@@ -38,13 +39,14 @@ module.exports = {
 				where: { email }
 			});
 
+			// Treat not found
 			if (!user) {
-				return res.status(400).send({ err: 'User not found.' });
+				return res.status(200).send({ err: 'Usuário não encontrado.' });
 			}
 
 			// Compare passwords
 			if (!await bcrypt.compare(password, user.password)) {
-				return res.status(400).send({ err: 'Invalid password.' });
+				return res.status(200).send({ err: 'Senha inválida.' });
 			}
 
 			// Sign jwt token
