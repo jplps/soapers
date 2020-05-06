@@ -28,11 +28,13 @@ module.exports = {
 		}
 	},
 
+	// Sign user in the application
 	async signIn(req, res) {
 		const { email, password } = req.body;
 
 		try {
-			const user = await User.findOne({
+			// Check user in the db
+			const user = await models.User.findOne({
 				where: { email }
 			});
 
@@ -40,18 +42,22 @@ module.exports = {
 				return res.status(400).send({ err: 'User not found.' });
 			}
 
+			// Compare passwords
 			if (!await bcrypt.compare(password, user.password)) {
 				return res.status(400).send({ err: 'Invalid password.' });
 			}
 
+			// Sign jwt token
 			const token = jwt.sign(
 				{ id: user.id },
 				authConfig.secret,
 				{ expiresIn: 86400 },
 			);
 
+			// Set the cookie with the token
 			res.cookie('token', token, { httpOnly: true });
 
+			// Return the user & token
 			return res.status(200).send({
 				user: {
 					id: user.id,

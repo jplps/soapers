@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import api from '../../services/api';
 import './styles.css';
@@ -20,6 +21,7 @@ export default () => {
 	const handleSignUP = async e => {
 		e.preventDefault();
 
+		// eslint-disable-next-line
 		let newUser;
 		setLoading(true);
 		if (signUP) {
@@ -30,7 +32,7 @@ export default () => {
 		}
 		setLoading(false);
 
-		console.log({ newUser });
+		return <Redirect to="/main" />
 	};
 
 	return (
@@ -38,18 +40,18 @@ export default () => {
 			<h1>distribunetes</h1>
 
 			<div className="login-options">
-				<button onClick={e => { e.preventDefault(); setSignUP(true); }}>
-					cadastro
+				<button className={signUP ? 'pressed' : ''} onClick={e => { e.preventDefault(); setSignUP(true); }}>
+					cadastrar
 				</button>
-				<button onClick={e => { e.preventDefault(); setSignUP(false); }}>
-					login
+				<button className={signUP ? '' : 'pressed'} onClick={e => { e.preventDefault(); setSignUP(false); }}>
+					entrar
 				</button>
 			</div>
 
 			<form onSubmit={handleSignUP}>
 				<fieldset disabled={loading} aria-busy={loading}>
 					<div className="form-email">
-						<label>@</label>
+						<label>usuário</label>
 						<input
 							type="email"
 							id="email"
@@ -62,7 +64,7 @@ export default () => {
 					</div>
 
 					<div className="form-pass">
-						<label>*</label>
+						<label>senha</label>
 						<input
 							type="password"
 							id="password"
@@ -73,7 +75,7 @@ export default () => {
 							required
 						/>
 					</div>
-					<button>{signUP ? 'cadastrar' : 'logar'}</button>
+					<button>enviar</button>
 				</fieldset>
 			</form>
 		</div>
