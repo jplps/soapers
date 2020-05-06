@@ -19,7 +19,7 @@ export default () => {
 		});
 	};
 
-	// Handle SignUP
+	// Handle user sign
 	const handleLogin = async e => {
 		e.preventDefault();
 
