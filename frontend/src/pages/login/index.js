@@ -30,11 +30,12 @@ export default () => {
 
 		// Fetch logic
 		setLoading(true);
+		// Await and set response
 		const { data } = await api.post(url, form);
 		setResponse(data);
-
+		// Check if it's not an error message
 		if (!data.err) { setUser(data); }
-
+		// Flag the end of fetch
 		setLoading(false);
 	};
 

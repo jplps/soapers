@@ -4,6 +4,28 @@ const jwt = require('jsonwebtoken');
 const models = require('../models');
 const authConfig = require('../config/auth');
 
+const signJWT = (user, res) => {
+	// Sign jwt token
+	const token = jwt.sign(
+		{ id: user.id },
+		authConfig.secret,
+		{ expiresIn: 86400 },
+	);
+
+	// Set the cookie with the token
+	res.cookie('token', token, { httpOnly: true });
+
+	// Return the user & token
+	return res.status(200).send({
+		user: {
+			id: user.id,
+			name: user.name,
+			email: user.email,
+		},
+		token
+	});
+}
+
 module.exports = {
 	// Register new user
 	async signUp(req, res) {
@@ -20,8 +42,8 @@ module.exports = {
 			// Creating the user in the db
 			const user = await models.User.create({ email, password });
 
-			// Returning the user to the browser
-			return res.status(200).send(user);
+			// Sign the user in
+			signJWT(user, res);
 		} catch (err) {
 			// Let error run in console and send a message
 			console.log(err);
@@ -49,25 +71,8 @@ module.exports = {
 				return res.status(200).send({ err: 'Senha inválida.' });
 			}
 
-			// Sign jwt token
-			const token = jwt.sign(
-				{ id: user.id },
-				authConfig.secret,
-				{ expiresIn: 86400 },
-			);
-
-			// Set the cookie with the token
-			res.cookie('token', token, { httpOnly: true });
-
-			// Return the user & token
-			return res.status(200).send({
-				user: {
-					id: user.id,
-					name: user.name,
-					email: user.email,
-				},
-				token
-			});
+			// Sign the user in
+			signJWT(user, res);
 		} catch (err) {
 			console.log(err);
 			return res.status(400).send({ err });
