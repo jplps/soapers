@@ -43,7 +43,7 @@ module.exports = {
 			const user = await models.User.create({ email, password });
 
 			// Sign the user in
-			signJWT(user, res);
+			return signJWT(user, res);
 		} catch (err) {
 			// Let error run in console and send a message
 			console.log(err);
@@ -72,7 +72,7 @@ module.exports = {
 			}
 
 			// Sign the user in
-			signJWT(user, res);
+			return signJWT(user, res);
 		} catch (err) {
 			console.log(err);
 			return res.status(400).send({ err });
