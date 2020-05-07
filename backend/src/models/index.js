@@ -31,26 +31,24 @@ db.Sequelize = Sequelize;
 
 module.exports = db;
 
-// user - email, pass
-// A user has many sales
-// A user has many purchases
-// A user has many payments
+// USER - email, pass
+// A USER has many PURCHASEs
+// A USER has many PAYMENTs
 
-// product - name, price, stock
-// A product belongs to many sales
-// A product belongs to many purchases
+// PRODUCT - name, price, stock
+// A PRODUCT belongs to many PURCHASEs
 
-// purchase - user, product, quantity, date, total
-// A purchase belongs to one user
-// A purchase has one product
+// PURCHASE - USER, TYPE, PRODUCT, quantity, date, total
+// A PURCHASE belongs to one USER
+// A PURCHASE has one PRODUCT
+// A PURCHASE has one TYPE
 
-// sale - user, product, quantity, date, total
-// A sale belongs to one user
-// A sale has one product
+// TYPE - name
+// A TYPE belongs to many PURCHASEs
 
-// tax - name, value
-// A tax belongs to many payments
+// TAX - name, value
+// A TAX belongs to many PAYMENTs
 
-// payment - user, tax, date, total, paid
-// A payment belongs to one user
-// A payment has one tax
+// PAYMENT - USER, TAX, date, total, paid
+// A PAYMENT belongs to one USER
+// A PAYMENT has one TAX

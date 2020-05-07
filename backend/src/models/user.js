@@ -4,10 +4,10 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     password: DataTypes.STRING
 
-  }, {});
+  }, { sequelize, modelName: 'user' });
   User.associate = function (models) {
-    // A User has many Sales
-
+    User.hasMany(models.Purchase);
+    User.hasMany(models.Payment);
   };
   return User;
 };
