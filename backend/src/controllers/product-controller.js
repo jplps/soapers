@@ -19,6 +19,7 @@ router.post('/create', async (req, res) => {
 	}
 });
 
+/*
 // Reading a specific product
 router.get('/read', async (req, res) => {
 	try {
@@ -54,5 +55,6 @@ router.delete('/delete', async (req, res) => {
 		return res.status(400).send({ err });
 	}
 });
+*/
 
 module.exports = app => app.use('/products', authMiddleware, router);
