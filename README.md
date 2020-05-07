@@ -10,9 +10,9 @@ Inside the main dir, run the command to get the DB, Backend and Frontend contain
 
 ## Creating DB
 
-With the container running, let's create the db and execute the migrations & seeders
+With the container running, let's create the db and execute the migrations
 
-	$ yarn sequelize db:migrate
+	$ docker exec -it <backend-container> yarn sequelize db:migrate
 
 ## Check DB
 
