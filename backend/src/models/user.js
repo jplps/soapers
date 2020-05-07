@@ -6,7 +6,9 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING(64)
   }, { sequelize, modelName: 'user' });
   User.associate = function (models) {
+    // Add userId to Purchase model
     User.hasMany(models.Purchase);
+    // Add userId to Payment model
     User.hasMany(models.Payment);
   };
   return User;
