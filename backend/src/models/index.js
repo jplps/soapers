@@ -33,18 +33,20 @@ module.exports = db;
 
 // user - email, pass
 // A user has many sales
+// A user has many purchases
 // A user has many payments
 
-// soap - name, price, stock
-// A soap belongs to many sales
-// A soap belongs to many purchases
+// product - name, price, stock
+// A product belongs to many sales
+// A product belongs to many purchases
 
-// purchase - soap, quantity, total
-// A purchase has one soap
+// purchase - user, product, quantity, date, total
+// A purchase belongs to one user
+// A purchase has one product
 
-// sale - user, soap, quantity, date, total
+// sale - user, product, quantity, date, total
 // A sale belongs to one user
-// A sale has one soap
+// A sale has one product
 
 // tax - name, value
 // A tax belongs to many payments
