@@ -9,12 +9,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       date: {
+        allowNull: false,
         type: Sequelize.DATEONLY
       },
       total: {
+        allowNull: false,
         type: Sequelize.DOUBLE
       },
       paid: {
+        defaultValue: false,
         type: Sequelize.BOOLEAN
       },
       createdAt: {
