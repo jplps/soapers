@@ -30,3 +30,25 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 module.exports = db;
+
+// user - email, pass
+// A user has many sales
+// A user has many payments
+
+// soap - name, price, stock
+// A soap belongs to many sales
+// A soap belongs to many purchases
+
+// purchase - soap, quantity, total
+// A purchase has one soap
+
+// sale - user, soap, quantity, date, total
+// A sale belongs to one user
+// A sale has one soap
+
+// tax - name, value
+// A tax belongs to many payments
+
+// payment - user, tax, date, total, paid
+// A payment belongs to one user
+// A payment has one tax
