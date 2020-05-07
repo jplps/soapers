@@ -81,6 +81,10 @@ router.post('/signin', async (req, res) => {
 	}
 });
 
-
+// Sign user out of the application
+router.post('/signout', async (req, res) => {
+	res.clearCookie('token');
+	return res.status(200).send({ message: 'Até breve!' })
+});
 
 module.exports = app => app.use('/auth', router)
