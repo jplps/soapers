@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Payment = sequelize.define('Payment', {
-    date: DataTypes.DATE,
+    date: DataTypes.DATEONLY,
     total: DataTypes.DOUBLE,
     paid: DataTypes.BOOLEAN
   }, { sequelize, modelName: 'payment' });

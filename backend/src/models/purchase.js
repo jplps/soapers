@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Purchase = sequelize.define('Purchase', {
     quantity: DataTypes.INTEGER,
-    date: DataTypes.DATE,
+    date: DataTypes.DATEONLY,
     total: DataTypes.DOUBLE
   }, { sequelize, modelName: 'purchase' });
   Purchase.associate = function (models) {

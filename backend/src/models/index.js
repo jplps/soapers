@@ -31,7 +31,7 @@ db.Sequelize = Sequelize;
 
 module.exports = db;
 
-// USER - email, pass
+// USER - name, email, pass
 // A USER has many PURCHASEs
 // A USER has many PAYMENTs
 
