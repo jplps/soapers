@@ -2,13 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const routes = require('./routes');
 
 // Building app
 const app = express();
 
 // Allowing cross origin
-app.use(cors());
+app.use(cors({
+	origin: 'http://localhost:3000',
+	credentials: true
+}));
 
 // Understanding req in json
 app.use(bodyParser.json());
@@ -20,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Using routes
-app.use(routes);
+require('./controllers/index')(app);
 
 // Exposing port
 app.listen(4000);

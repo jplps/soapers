@@ -1,5 +1,8 @@
+const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
+const router = express.Router();
 
 const models = require('../models');
 const authConfig = require('../config/auth');
@@ -26,56 +29,58 @@ const signJWT = (user, res) => {
 	});
 }
 
-module.exports = {
-	// Register new user
-	async signUp(req, res) {
-		const { email } = req.body;
+// Register new user
+router.post('/signup', async (req, res) => {
+	const { email } = req.body;
 
-		try {
-			// See if there's not a user with that email
-			if (await models.User.findOne({ where: { email } })) {
-				return res.status(200).send({ err: 'Já existe um usuário com este e-mail.' })
-			}
-			// Store hashed pass
-			const password = await bcrypt.hash(req.body.password, 10);
-
-			// Creating the user in the db
-			const user = await models.User.create({ email, password });
-
-			// Sign the user in
-			return signJWT(user, res);
-		} catch (err) {
-			// Let error run in console and send a message
-			console.log(err);
-			return res.status(200).send({ err: 'Registro de usuário falhou. Veja o console do Banco de Dados para mais informações sobre o erro.' });
+	try {
+		// See if there's not a user with that email
+		if (await models.User.findOne({ where: { email } })) {
+			return res.status(200).send({ err: 'Já existe um usuário com este e-mail.' })
 		}
-	},
+		// Store hashed pass
+		const password = await bcrypt.hash(req.body.password, 10);
 
-	// Sign user in the application
-	async signIn(req, res) {
-		const { email, password } = req.body;
+		// Creating the user in the db
+		const user = await models.User.create({ email, password });
 
-		try {
-			// Check user in the db
-			const user = await models.User.findOne({
-				where: { email }
-			});
+		// Sign the user in
+		return signJWT(user, res);
+	} catch (err) {
+		// Let error run in console and send a message
+		console.log(err);
+		return res.status(200).send({ err: 'Registro de usuário falhou. Veja o console do Banco de Dados para mais informações sobre o erro.' });
+	}
+});
 
-			// Treat not found
-			if (!user) {
-				return res.status(200).send({ err: 'Usuário não encontrado.' });
-			}
+// Sign user in the application
+router.post('/signin', async (req, res) => {
+	const { email, password } = req.body;
 
-			// Compare passwords
-			if (!await bcrypt.compare(password, user.password)) {
-				return res.status(200).send({ err: 'Senha inválida.' });
-			}
+	try {
+		// Check user in the db
+		const user = await models.User.findOne({
+			where: { email }
+		});
 
-			// Sign the user in
-			return signJWT(user, res);
-		} catch (err) {
-			console.log(err);
-			return res.status(400).send({ err });
+		// Treat not found
+		if (!user) {
+			return res.status(200).send({ err: 'Usuário não encontrado.' });
 		}
-	},
-};
+
+		// Compare passwords
+		if (!await bcrypt.compare(password, user.password)) {
+			return res.status(200).send({ err: 'Senha inválida.' });
+		}
+
+		// Sign the user in
+		return signJWT(user, res);
+	} catch (err) {
+		console.log(err);
+		return res.status(400).send({ err });
+	}
+});
+
+
+
+module.exports = app => app.use('/auth', router)
