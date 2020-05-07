@@ -5,10 +5,8 @@ import api from '../../services/api';
 import './styles.css';
 
 export default () => {
-	const [user, setUser] = useState();
 	const [signUP, setSignUP] = useState(true);
 	const [form, setValues] = useState({ email: '', password: '' });
-	const [loading, setLoading] = useState(false);
 	const [response, setResponse] = useState();
 
 	// Update form field value
@@ -29,69 +27,62 @@ export default () => {
 		else { url = '/auth/signin' }
 
 		// Fetch logic
-		setLoading(true);
 		// Await and set response
-		const { data } = await api.post(url, form);
+		const { data } = await api.post(url, form, { withCredentials: true });
 		setResponse(data);
 		// Check if it's not an error message
-		if (!data.err) { setUser(data); }
-		// Flag the end of fetch
-		setLoading(false);
+		if (data.err) { return }
+
+		return <Redirect to="/main" />
 	};
 
 	return (
-		<>
-			{user ? <Redirect to="/main" /> : (
-				<div id="login">
-					<h1>distribunetes</h1>
+		<div id="login">
+			<h1>distribunetes</h1>
 
-					<div className="login-options">
-						<button className={signUP ? 'pressed' : ''} onClick={e => { e.preventDefault(); setSignUP(true); }}>
-							cadastrar
+			<div className="login-options">
+				<button className={signUP ? 'pressed' : ''} onClick={e => { e.preventDefault(); setSignUP(true); }}>
+					cadastrar
 						</button>
 
-						<button className={signUP ? '' : 'pressed'} onClick={e => { e.preventDefault(); setSignUP(false); }}>
-							entrar
+				<button className={signUP ? '' : 'pressed'} onClick={e => { e.preventDefault(); setSignUP(false); }}>
+					entrar
 						</button>
+			</div>
+
+			<form onSubmit={handleLogin}>
+				<fieldset>
+					<div className="form-email">
+						<label>usuário</label>
+						<input
+							type="email"
+							id="email"
+							name="email"
+							placeholder="usuario@exemplo.com.br"
+							value={form.email}
+							onChange={updateField}
+							required
+						/>
 					</div>
 
-					{loading ? <p>loading</p> : (
-						<form onSubmit={handleLogin}>
-							<fieldset>
-								<div className="form-email">
-									<label>usuário</label>
-									<input
-										type="email"
-										id="email"
-										name="email"
-										placeholder="usuario@exemplo.com.br"
-										value={form.email}
-										onChange={updateField}
-										required
-									/>
-								</div>
+					<div className="form-pass">
+						<label>senha</label>
+						<input
+							type="password"
+							id="password"
+							name="password"
+							placeholder="********"
+							value={form.password}
+							onChange={updateField}
+							required
+						/>
+					</div>
 
-								<div className="form-pass">
-									<label>senha</label>
-									<input
-										type="password"
-										id="password"
-										name="password"
-										placeholder="********"
-										value={form.password}
-										onChange={updateField}
-										required
-									/>
-								</div>
+					{typeof response !== 'undefined' && response.err && <p dangerouslySetInnerHTML={{ __html: response.err }} />}
 
-								{typeof response !== 'undefined' && response.err && <p dangerouslySetInnerHTML={{ __html: response.err }} />}
-
-								<button>enviar</button>
-							</fieldset>
-						</form>
-					)}
-				</div>
-			)}
-		</>
+					<button>enviar</button>
+				</fieldset>
+			</form>
+		</div>
 	);
 }

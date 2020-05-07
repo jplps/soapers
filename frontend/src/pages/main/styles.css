@@ -1,51 +1,51 @@
-#login {
+#purchase {
 	margin: 1rem;
 }
 
-#login h1 {
+#purchase h2,
+#purchase h1 {
 	text-align: center;
 }
 
-#login form button:active,
-#login .pressed {
+#purchase form button:active,
+#purchase .pressed {
 	background-color: #000;
 	border: 1px solid #000;
 	color: #fafafa;	
 }
 
-#login fieldset,
-#login .login-options {
+#purchase fieldset {
 	max-width: 500px;
 	margin: 2rem auto;
 	display: grid;
 	grid-gap: 1rem;
 }
 
-#login .login-options {
+#purchase .purchase-options {
 	grid-template-columns: 1fr 1fr;
 }
 
-#login fieldset {
+#purchase fieldset {
 	grid-template-columns: 1fr;
 	padding: 1rem;
 }
 
-#login .form-email,
-#login .form-pass {
+#purchase .form-quant,
+#purchase .form-date {
 	margin: auto;
 	padding-bottom: 1rem;
 	max-width: 500px;
 	display: grid;
-	grid-template-columns: 15% 1fr;
+	grid-template-columns: 25% 1fr;
 	grid-gap: 1rem;
 	align-items: center;
 }
 
-#login p {
+#purchase p {
 	text-align: center;
 	margin: 1rem auto;
 }
 
-#login form fieldset button {
+#purchase form fieldset button {
 	margin: auto;
 }
