@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './styles.css';
 
 export default () => {
-	const [form, setValues] = useState({ email: '', password: '' });
+	const [form, setValues] = useState({ quantity: '', date: '' });
 
 	// Update form field value
 	const updateField = e => {
