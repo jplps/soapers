@@ -40,7 +40,7 @@ If all went well, see localhost:3000 in the browser.
 - [x] Refactor to keep backend/src/config with config files
 - [x] Create migrations with sequelize-cli
 - [x] Refactor migrations before run - adjust db data sizes
-- [x] Refactor models berfore run - adjust associations
+- [x] Refactor models berfore run - adjust associations (check /src/models/index.js in the comments)
 - [x] Create backend/src/server.js as the entry point (will be ran with yarn nodemon src/server.js)
 - [x] Create middlewares folder to keep authentication stuff
 - [ ] Create controllers with the avaiable routes
