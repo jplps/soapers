@@ -4,7 +4,11 @@ module.exports = (sequelize, DataTypes) => {
     quantity: DataTypes.INTEGER,
     date: DataTypes.DATEONLY,
     total: DataTypes.DOUBLE
-  }, { sequelize, modelName: 'purchase' });
+  }, {
+    sequelize,
+    modelName: 'purchase',
+    freezeTableName: true
+  });
   Purchase.associate = function (models) {
     Purchase.belongsTo(models.User);
     Purchase.hasOne(models.Product);

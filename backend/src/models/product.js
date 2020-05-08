@@ -4,7 +4,11 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING(128),
     price: DataTypes.DOUBLE,
     stock: DataTypes.INTEGER
-  }, { sequelize, modelName: 'product' });
+  }, {
+    sequelize,
+    modelName: 'product',
+    freezeTableName: true
+  });
   Product.associate = function (models) {
     Product.belongsToMany(models.Purchase, { through: 'PurchaseProduct' });
   };

@@ -4,7 +4,11 @@ module.exports = (sequelize, DataTypes) => {
     date: DataTypes.DATEONLY,
     total: DataTypes.DOUBLE,
     paid: DataTypes.BOOLEAN
-  }, { sequelize, modelName: 'payment' });
+  }, {
+    sequelize,
+    modelName: 'payment',
+    freezeTableName: true
+  });
   Payment.associate = function (models) {
     Payment.belongsTo(models.User);
     Payment.hasOne(models.Tax);
