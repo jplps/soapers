@@ -1,4 +1,4 @@
-# Distribunetes
+# Soapers
 
 This is a fullstack Node/Express REST API using Sequelize ORM in the backend with a Node/React frontend to keep track of multiple data from soap retailers. It servers the necessary endpoints to the frontend, and it has a complete authentication flow with JWT and a middleware check for a httpOnly token.
 
