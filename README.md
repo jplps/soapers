@@ -1,11 +1,6 @@
 # Soapers
 
-This system allow users to register cultural events. Users can filter events by area (city, state, latitude, longitude) and by it's category(ies).
-
-## Who Are We?
-
-Fullstack Node/Express REST API using Sequelize ORM in the backend with a Node/React frontend to keep track of multiple data from soap retailers. It servers the necessary endpoints to the frontend, and it has a complete authentication flow with JWT and a middleware check for a httpOnly token.
-
+This system will help Soap distributors to deal with their products, sales, and purchases. The purpose is to present a dashboard with easy information about every sale aspect in the digital life of the vendor.
 
 ## Structure
 
