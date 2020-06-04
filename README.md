@@ -11,7 +11,7 @@ Fullstack Node/Express REST API using Sequelize ORM in the backend with a Node/R
 
 System: Dynamic Application
 Main lang(s): JavaScript (ECMA)
-Stack: Node / Express / Sequelize / React
+Stack: Node / Express & Sequelize / React
 Pattern: RESTful
 
 ### Dockerization
@@ -20,7 +20,7 @@ Inside the main dir, there is a docker-compose.yml file, that orchestrate the wh
 
 	$ docker-compose up
 
-### Server - The base backend with Node & Express / Sequelize
+### Backend - Node / Express & Sequelize
 
 Responsable for business rules, defines how the app behaves. It connects with the db and any external services needed. It handles the complete authentication/authorization for the users, criptography and security. The usage of the RESTful pattern differs from the classic MVC (Model, View, Controller) because it doesn't return the full page to the user but the data the client needs to render the complete view in the frontend (usually in JSON - JavaScript Object Notation). 
 
