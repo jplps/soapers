@@ -1,5 +1,9 @@
 # Soapers
 
+Deal with your Soap distribution sales.
+
+## Concept
+
 This system will help Soap distributors to deal with their products, sales, and purchases. The purpose is to present a dashboard with easy information about every sale aspect in the digital life of the vendor.
 
 ## Structure
@@ -37,6 +41,8 @@ With React we at the edge of the componentization pattern. Responsable for the i
 ## Check the app
 
 If all went well, see localhost:3000 in the browser.
+
+## Requirements
 
 ### Todos
 
